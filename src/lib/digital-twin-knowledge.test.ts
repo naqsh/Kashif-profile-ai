@@ -1,0 +1,34 @@
+import { describe, expect, it } from "vitest";
+import {
+  buildDigitalTwinSystemPrompt,
+  GITHUB_REPOS,
+  DIGITAL_TWIN_LINKS,
+} from "@/lib/digital-twin-knowledge";
+
+describe("digital-twin-knowledge", () => {
+  it("includes key GitHub repos in the system prompt", () => {
+    const prompt = buildDigitalTwinSystemPrompt();
+
+    expect(prompt).toContain("CompanyBrain");
+    expect(prompt).toContain("TaskFlowAI");
+    expect(prompt).toContain("Kashif-Profile-AI");
+    expect(prompt).toContain(DIGITAL_TWIN_LINKS.linkedin);
+  });
+
+  it("enforces concise grounded response rules", () => {
+    const prompt = buildDigitalTwinSystemPrompt();
+
+    expect(prompt).toContain("80–150 words");
+    expect(prompt).toContain("cite the relevant public GitHub repo");
+    expect(prompt).toContain("Do NOT invent employers");
+  });
+
+  it("maps data fetching to specific repos", () => {
+    const companyBrain = GITHUB_REPOS.find((repo) => repo.name === "CompanyBrain");
+    const profile = GITHUB_REPOS.find((repo) => repo.name === "Kashif-Profile-AI");
+
+    expect(companyBrain?.technologies).toContain("Python");
+    expect(profile?.dataFetching).toContain("Sanity GROQ");
+    expect(profile?.technologies).toContain("Sanity CMS");
+  });
+});
