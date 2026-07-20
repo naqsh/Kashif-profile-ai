@@ -206,23 +206,23 @@ const PortfolioSection = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-muted/20 to-background">
+    <section className="py-12 md:py-20 bg-gradient-to-b from-muted/20 to-background">
       <div className="container mx-auto px-4">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
           <motion.h2
-            className="text-4xl md:text-5xl font-bold mb-6 text-gradient"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-gradient"
             variants={itemVariants}
           >
             Portfolio & Projects
           </motion.h2>
           <motion.p
-            className="text-xl text-muted-foreground max-w-3xl mx-auto"
+            className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto"
             variants={itemVariants}
           >
             Verified projects from enterprise .NET / Azure delivery and public GitHub work — digital banking, payments, industrial systems and technical leadership
@@ -230,7 +230,7 @@ const PortfolioSection = () => {
         </motion.div>
 
         <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -335,7 +335,7 @@ const PortfolioSection = () => {
         </motion.div>
 
         <motion.div
-          className="text-center mt-16"
+          className="text-center mt-10 md:mt-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -343,8 +343,8 @@ const PortfolioSection = () => {
         >
           <motion.div variants={itemVariants}>
             <Card className="glass-morphism border-0 max-w-2xl mx-auto">
-              <CardContent className="p-8 text-center">
-                <h3 className="text-2xl font-bold mb-4">More on GitHub</h3>
+              <CardContent className="p-5 sm:p-8 text-center">
+                <h3 className="text-xl sm:text-2xl font-bold mb-4">More on GitHub</h3>
                 <p className="text-muted-foreground mb-6">
                   Explore all public repositories including Azure AI examples, FastAPI practice projects and earlier full-stack work.
                 </p>

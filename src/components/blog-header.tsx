@@ -62,15 +62,15 @@ export function BlogHeader({ post }: BlogHeaderProps) {
         ))}
       </div>
 
-      <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gradient text-balance leading-tight">
+      <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 text-gradient text-balance leading-tight">
         {post.title}
       </h1>
 
-      <p className="text-xl text-muted-foreground mb-8 text-balance max-w-3xl">
+      <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 text-balance max-w-3xl">
         {post.excerpt}
       </p>
 
-      <div className="flex flex-wrap items-center gap-6 mb-8">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4 sm:gap-6 mb-8">
         <div className="flex items-center gap-3">
           {post.author.image && (
             <Image
@@ -89,9 +89,9 @@ export function BlogHeader({ post }: BlogHeaderProps) {
           </div>
         </div>
 
-        <Separator orientation="vertical" className="h-12" />
+        <Separator orientation="vertical" className="hidden md:block h-12" />
 
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
           <div className="flex items-center gap-1.5">
             <Calendar className="h-4 w-4" />
             <time dateTime={post.publishedAt} suppressHydrationWarning>{publishedDate}</time>

@@ -428,7 +428,7 @@ const AIChat = () => {
         aria-controls="ai-twin-panel"
         whileHover={{ scale: 1.06 }}
         whileTap={{ scale: 0.94 }}
-        className="fixed bottom-6 right-6 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-sky-500 text-white shadow-[0_0_34px_rgba(14,165,233,0.55)] transition-colors duration-300 hover:bg-sky-400"
+        className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-sky-500 text-white shadow-[0_0_34px_rgba(14,165,233,0.55)] transition-colors duration-300 hover:bg-sky-400 mb-[env(safe-area-inset-bottom)] mr-[env(safe-area-inset-right)]"
       >
         {!isOpen ? (
           <span
@@ -472,7 +472,7 @@ const AIChat = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 18, scale: 0.96 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-26 right-6 z-40 flex h-[min(680px,calc(100dvh-8rem))] w-[calc(100vw-2rem)] max-w-[620px] flex-col overflow-hidden rounded-2xl border border-border/70 bg-background/95 shadow-[0_0_60px_rgba(0,0,0,0.45)] backdrop-blur-xl"
+            className="fixed inset-x-3 top-16 bottom-[5.5rem] z-40 flex flex-col overflow-hidden rounded-2xl border border-border/70 bg-background/95 shadow-[0_0_60px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:inset-x-auto sm:top-auto sm:bottom-26 sm:right-6 sm:h-[min(680px,calc(100dvh-8rem))] sm:w-[calc(100vw-2rem)] sm:max-w-[620px]"
           >
             <div className="flex items-center justify-between border-b border-border/70 px-4 py-3">
               <div className="flex items-center gap-3">
@@ -606,7 +606,7 @@ const AIChat = () => {
               <p className="mt-1.5 text-center text-[10px] text-muted-foreground">
                 AI Digital Twin · Responses may not reflect real-time views
               </p>
-              <div className="mt-1.5 flex items-center justify-center gap-3 text-[10px] text-muted-foreground">
+              <div className="mt-1.5 hidden sm:flex items-center justify-center gap-3 text-[10px] text-muted-foreground">
                 <span>💬 Smart conversations</span>
                 <span>🎤 Voice input</span>
                 <span>📊 Analytics enabled</span>

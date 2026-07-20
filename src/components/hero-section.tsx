@@ -79,14 +79,14 @@ const HeroSection = () => {
       {!prefersReducedMotion && (
         <>
           <motion.div
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
+            className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-purple-500/20 rounded-full blur-3xl"
             animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             style={{ y: y2 }}
             aria-hidden="true"
           />
           <motion.div
-            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"
+            className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-blue-500/20 rounded-full blur-3xl"
             animate={{ scale: [1.2, 1, 1.2], opacity: [0.5, 0.3, 0.5] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             style={{ y: y1 }}
@@ -103,8 +103,8 @@ const HeroSection = () => {
         style={prefersReducedMotion ? undefined : { opacity }}
       >
         <motion.div variants={itemVariants}>
-          <div className="mb-8">
-            <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-purple-400 to-blue-600 p-1 glow-effect relative overflow-hidden">
+          <div className="mb-6 md:mb-8">
+            <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 md:mb-6 rounded-full bg-gradient-to-br from-purple-400 to-blue-600 p-1 glow-effect relative overflow-hidden">
               <Image
                 src={PROFILE_DATA.profilePhotoUrl}
                 alt={`${PROFILE_DATA.name} — professional headshot`}
@@ -119,14 +119,14 @@ const HeroSection = () => {
         </motion.div>
 
         <motion.h1
-          className="text-5xl md:text-7xl font-bold mb-4 text-balance"
+          className="text-3xl sm:text-5xl md:text-7xl font-bold mb-3 md:mb-4 text-balance px-2"
           variants={itemVariants}
         >
           <span className="text-gradient inline-block">{PROFILE_DATA.name}</span>
         </motion.h1>
 
         <motion.div
-          className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto text-balance leading-relaxed min-h-8 flex items-center justify-center"
+          className="text-base sm:text-xl md:text-2xl text-muted-foreground mb-6 md:mb-8 max-w-4xl mx-auto text-balance leading-relaxed min-h-7 sm:min-h-8 flex items-center justify-center px-2"
           variants={itemVariants}
           aria-live={prefersReducedMotion ? undefined : "polite"}
         >
@@ -134,19 +134,19 @@ const HeroSection = () => {
         </motion.div>
 
         <motion.p
-          className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto text-balance leading-relaxed"
+          className="text-sm sm:text-base md:text-lg text-muted-foreground mb-6 md:mb-8 max-w-3xl mx-auto text-balance leading-relaxed px-1"
           variants={itemVariants}
         >
           {PROFILE_DATA.summary.split("\n\n")[0]}
         </motion.p>
 
         {/* Plain HTML contact — crawlable without JS */}
-        <address className="not-italic text-sm text-muted-foreground mb-10 space-y-1">
-          <div>
-            <a href={`mailto:${PROFILE_DATA.email}`} className="hover:text-foreground transition-colors">
+        <address className="not-italic text-sm text-muted-foreground mb-8 md:mb-10 space-y-1 px-2">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-1 sm:gap-0">
+            <a href={`mailto:${PROFILE_DATA.email}`} className="hover:text-foreground transition-colors break-all">
               {PROFILE_DATA.email}
             </a>
-            {" · "}
+            <span className="hidden sm:inline" aria-hidden="true">{" · "}</span>
             <a href={`tel:${PROFILE_DATA.phone}`} className="hover:text-foreground transition-colors">
               {PROFILE_DATA.phone}
             </a>
@@ -155,12 +155,12 @@ const HeroSection = () => {
         </address>
 
         <motion.div
-          className="flex flex-wrap gap-4 justify-center mb-12"
+          className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center mb-10 md:mb-12 px-2"
           variants={itemVariants}
         >
           <Button
             size="lg"
-            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-6 text-lg glow-effect"
+            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg glow-effect w-full sm:w-auto"
             onClick={handleDownloadCv}
           >
             <Download className="mr-2 h-5 w-5" aria-hidden="true" />
@@ -169,18 +169,18 @@ const HeroSection = () => {
           <Button
             size="lg"
             variant="outline"
-            className="px-8 py-6 text-lg border-2 hover:bg-accent"
+            className="px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg border-2 hover:bg-accent w-full sm:w-auto"
             onClick={handleGetInTouch}
           >
             <Mail className="mr-2 h-5 w-5" aria-hidden="true" />
             Get In Touch
           </Button>
-          <Button size="lg" variant="secondary" className="px-6 py-6 text-lg" asChild>
+          <Button size="lg" variant="secondary" className="px-6 py-5 sm:py-6 text-base sm:text-lg w-full sm:w-auto" asChild>
             <a href="/resume">Plain-text Resume</a>
           </Button>
         </motion.div>
 
-        <motion.div className="flex gap-5 justify-center mb-16" variants={itemVariants}>
+        <motion.div className="flex gap-4 sm:gap-5 justify-center mb-12 md:mb-16" variants={itemVariants}>
           {SOCIAL_LINKS.map((link) => (
             <SocialIconLink
               key={link.id}

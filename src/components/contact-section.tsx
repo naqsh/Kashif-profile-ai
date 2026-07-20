@@ -85,23 +85,23 @@ const ContactSection = () => {
   const socialLinks = SOCIAL_LINKS.filter((link) => link.id !== "email");
 
   return (
-    <section className="py-20 bg-gradient-to-b from-muted/20 to-background">
+    <section className="py-12 md:py-20 bg-gradient-to-b from-muted/20 to-background">
       <div className="container mx-auto px-4">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
           <motion.h2
-            className="text-4xl md:text-5xl font-bold mb-6 text-gradient"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-gradient"
             variants={itemVariants}
           >
             Get In Touch
           </motion.h2>
           <motion.p
-            className="text-xl text-muted-foreground max-w-3xl mx-auto"
+            className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto"
             variants={itemVariants}
           >
             Email is the fastest way to reach me. Use the compose form below only if you prefer
@@ -109,10 +109,10 @@ const ContactSection = () => {
           </motion.p>
         </motion.div>
 
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 md:gap-12">
           {/* Primary contact */}
           <motion.div
-            className="space-y-8"
+            className="space-y-6 md:space-y-8"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -120,20 +120,21 @@ const ContactSection = () => {
           >
             <motion.div variants={itemVariants}>
               <Card className="glass-morphism border-0 ring-2 ring-primary/20">
-                <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold mb-2">Contact Information</h3>
+                <CardContent className="p-5 sm:p-8">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2">Contact Information</h3>
                   <p className="text-sm text-muted-foreground mb-6">
                     Preferred way to get in touch — opens your email app directly.
                   </p>
 
                   <Button
                     size="lg"
-                    className="w-full mb-6 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90"
+                    className="w-full mb-6 h-auto min-h-11 whitespace-normal text-center py-3 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90"
                     asChild
                   >
-                    <a href={`mailto:${PROFILE_DATA.email}`}>
-                      <Mail className="h-5 w-5 mr-2" />
-                      Email {PROFILE_DATA.email}
+                    <a href={`mailto:${PROFILE_DATA.email}`} className="flex flex-wrap items-center justify-center gap-1">
+                      <Mail className="h-5 w-5 shrink-0" />
+                      <span className="sm:hidden">Email me</span>
+                      <span className="hidden sm:inline break-all">Email {PROFILE_DATA.email}</span>
                     </a>
                   </Button>
 
@@ -142,20 +143,20 @@ const ContactSection = () => {
                       <a
                         key={index}
                         href={method.href}
-                        className="flex items-center gap-4 p-4 rounded-lg hover:bg-accent transition-all duration-300 group"
+                        className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg hover:bg-accent transition-all duration-300 group min-w-0"
                       >
                         <div
-                          className={`w-12 h-12 rounded-lg bg-gradient-to-br ${method.color} flex items-center justify-center flex-shrink-0`}
+                          className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br ${method.color} flex items-center justify-center flex-shrink-0`}
                         >
-                          <method.icon className="h-6 w-6 text-white" />
+                          <method.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                         </div>
-                        <div className="flex-1">
+                        <div className="flex-1 min-w-0">
                           <p className="text-sm text-muted-foreground">{method.label}</p>
-                          <p className="font-medium group-hover:text-primary transition-colors">
+                          <p className="font-medium group-hover:text-primary transition-colors break-all">
                             {method.value}
                           </p>
                         </div>
-                        <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                        <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
                       </a>
                     ))}
                   </div>
@@ -165,8 +166,8 @@ const ContactSection = () => {
 
             <motion.div variants={itemVariants}>
               <Card className="glass-morphism border-0">
-                <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold mb-6">Connect With Me</h3>
+                <CardContent className="p-5 sm:p-8">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-6">Connect With Me</h3>
                   <div className="flex flex-wrap gap-3">
                     {socialLinks.map((link) => {
                       const Icon = SOCIAL_ICONS[link.icon];
@@ -215,8 +216,8 @@ const ContactSection = () => {
           >
             <motion.div variants={itemVariants}>
               <Card className="glass-morphism border-0 h-full">
-                <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold mb-2">Compose a Message</h3>
+                <CardContent className="p-5 sm:p-8">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2">Compose a Message</h3>
                   <p className="text-sm text-muted-foreground mb-6">
                     Simply fill in your details to open your email app, fully pre-populated and
                     ready to send. The email is sent from your own account, nothing is transmitted

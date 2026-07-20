@@ -101,9 +101,9 @@ export default function BlogsPage() {
         <div className="absolute inset-0 bg-grid-pattern opacity-5 dark:opacity-10" aria-hidden="true" />
         
         <main className="container mx-auto px-4 py-24 relative z-10">
-          <header className="text-center mb-16">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gradient">Blog</h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-balance leading-relaxed">
+          <header className="text-center mb-10 md:mb-16">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 md:mb-6 text-gradient">Blog</h1>
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-balance leading-relaxed">
               Insights on full-stack development, cloud architecture, AI/ML, and modern web
               technologies. Real production code, architectural patterns, and lessons learned from
               building scalable systems.

@@ -77,23 +77,23 @@ const AboutSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-muted/20">
+    <section className="py-12 md:py-20 bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto px-4">
         <motion.div
-          className="max-w-4xl mx-auto text-center mb-16"
+          className="max-w-4xl mx-auto text-center mb-10 md:mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
           <motion.h2
-            className="text-4xl md:text-5xl font-bold mb-6 text-gradient"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-gradient"
             variants={itemVariants}
           >
             About Me
           </motion.h2>
           <motion.p
-            className="text-xl text-muted-foreground mb-8 leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 leading-relaxed"
             variants={itemVariants}
           >
             {PROFILE_DATA.summary}
@@ -108,7 +108,7 @@ const AboutSection = () => {
           viewport={{ once: true }}
         >
           <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 md:mb-16"
             variants={containerVariants}
           >
             {expertiseAreas.map((area, index) => (
@@ -172,7 +172,7 @@ const AboutSection = () => {
                   ease: "easeInOut",
                 }}
               />
-              <CardContent className="p-8 relative z-10">
+              <CardContent className="p-5 sm:p-8 relative z-10">
                 <motion.h3 
                   className="text-2xl font-bold mb-6 text-center"
                   whileHover={{ scale: 1.02 }}
@@ -249,10 +249,10 @@ const AboutSection = () => {
                   <Button
                     variant="outline"
                     onClick={() => handleExpertiseClick('Contact')}
-                    className="group relative overflow-hidden"
+                    className="group relative overflow-hidden h-auto min-h-11 whitespace-normal text-center px-4 py-3"
                   >
                     <span className="relative z-10">Let&apos;s discuss how I can help your project</span>
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="ml-2 h-4 w-4 shrink-0 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </motion.div>
               </CardContent>

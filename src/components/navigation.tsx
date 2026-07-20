@@ -42,6 +42,15 @@ const Navigation = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isOpen]);
+
   const toggleTheme = () => {
     document.documentElement.classList.toggle("dark");
   };
@@ -174,7 +183,7 @@ const Navigation = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 z-40 lg:hidden"
+            className="fixed inset-0 z-[60] lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -189,7 +198,7 @@ const Navigation = () => {
             />
 
             <motion.div
-              className="absolute right-0 top-0 h-full w-64 bg-background border-l border-border shadow-xl"
+              className="absolute right-0 top-0 h-full w-[min(100vw,20rem)] bg-background border-l border-border shadow-xl pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -197,7 +206,7 @@ const Navigation = () => {
               role="dialog"
               aria-label="Mobile navigation menu"
             >
-              <div className="p-6">
+              <div className="p-6 h-full overflow-y-auto">
                 <div className="flex items-center justify-between mb-8">
                   <span className="font-bold text-lg text-gradient">Menu</span>
                   <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} aria-label="Close menu">

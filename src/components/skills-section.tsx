@@ -61,26 +61,26 @@ const SkillsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-muted/20">
+    <section className="py-12 md:py-20 bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto px-4">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <motion.h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient" variants={itemVariants}>
+          <motion.h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-gradient" variants={itemVariants}>
             Skills & Expertise
           </motion.h2>
-          <motion.p className="text-xl text-muted-foreground max-w-3xl mx-auto" variants={itemVariants}>
+          <motion.p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto" variants={itemVariants}>
             .NET Core, C#, ASP.NET, SQL Server, Azure CI/CD, Angular, Entity Framework and enterprise
             integrations — with verified years of hands-on experience
           </motion.p>
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12"
+          className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto mb-10 md:mb-12"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -88,10 +88,12 @@ const SkillsSection = () => {
         >
           {headlineYears.map((item) => (
             <motion.div key={item.skill} variants={itemVariants}>
-              <Card className="glass-morphism border-0 text-center">
-                <CardContent className="p-4">
-                  <div className="text-2xl font-bold text-primary">{item.years}+</div>
-                  <div className="text-xs text-muted-foreground mt-1">years {item.skill}</div>
+              <Card className="glass-morphism border-0 text-center h-full">
+                <CardContent className="p-3 sm:p-4">
+                  <div className="text-xl sm:text-2xl font-bold text-primary">{item.years}+</div>
+                  <div className="text-[10px] sm:text-xs text-muted-foreground mt-1 leading-snug break-words">
+                    years {item.skill}
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -99,7 +101,7 @@ const SkillsSection = () => {
         </motion.div>
 
         <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -108,14 +110,14 @@ const SkillsSection = () => {
           {skillCategories.map((category, index) => (
             <motion.div key={index} variants={itemVariants}>
               <Card className="h-full glass-morphism hover:glow-effect transition-all duration-300 border-0">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-6">
+                <CardContent className="p-4 sm:p-6">
+                  <div className="flex items-center mb-5 md:mb-6 min-w-0">
                     <div
-                      className={`w-12 h-12 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center text-white mr-4`}
+                      className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center text-white mr-3 sm:mr-4 shrink-0`}
                     >
-                      <category.icon className="h-6 w-6" aria-hidden="true" />
+                      <category.icon className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
                     </div>
-                    <h3 className="text-xl font-bold">{category.title}</h3>
+                    <h3 className="text-lg sm:text-xl font-bold leading-tight">{category.title}</h3>
                   </div>
 
                   <ul className="space-y-2">
@@ -126,11 +128,11 @@ const SkillsSection = () => {
                           <button
                             type="button"
                             onClick={() => handleSkillClick(category.title, skill)}
-                            className="w-full flex justify-between items-center text-sm font-medium text-left hover:text-primary transition-colors rounded px-1 py-0.5"
+                            className="w-full flex justify-between items-center gap-2 text-sm font-medium text-left hover:text-primary transition-colors rounded px-1 py-0.5 min-w-0"
                           >
-                            <span>{skill}</span>
+                            <span className="min-w-0 break-words">{skill}</span>
                             {years != null ? (
-                              <Badge variant="secondary" className="text-xs shrink-0 ml-2">
+                              <Badge variant="secondary" className="text-xs shrink-0">
                                 {years} {years === 1 ? "yr" : "yrs"}
                               </Badge>
                             ) : null}
@@ -146,7 +148,7 @@ const SkillsSection = () => {
         </motion.div>
 
         <motion.div
-          className="mt-16 max-w-4xl mx-auto"
+          className="mt-10 md:mt-16 max-w-4xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -154,8 +156,8 @@ const SkillsSection = () => {
         >
           <motion.div variants={itemVariants}>
             <Card className="glass-morphism border-0">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-6 text-center">Certifications & Achievements</h3>
+              <CardContent className="p-5 sm:p-8">
+                <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center">Certifications & Achievements</h3>
                 <div className="flex flex-wrap gap-3 justify-center">
                   {PROFILE_DATA.certifications.map((cert, index) => (
                     <Badge

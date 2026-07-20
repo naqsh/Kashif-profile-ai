@@ -9,31 +9,31 @@ import { urlFor } from "@/sanity/lib/client";
 const components: PortableTextComponents = {
   block: {
     h1: ({ children }) => (
-      <h1 className="text-4xl md:text-5xl font-bold mb-6 mt-12 text-gradient">{children}</h1>
+      <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-6 mt-8 sm:mt-12 text-gradient">{children}</h1>
     ),
     h2: ({ children }) => (
-      <h2 className="text-3xl md:text-4xl font-bold mb-5 mt-10 text-foreground">{children}</h2>
+      <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-5 mt-8 sm:mt-10 text-foreground">{children}</h2>
     ),
     h3: ({ children }) => (
-      <h3 className="text-2xl md:text-3xl font-bold mb-4 mt-8 text-foreground">{children}</h3>
+      <h3 className="text-lg sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 mt-6 sm:mt-8 text-foreground">{children}</h3>
     ),
     h4: ({ children }) => (
-      <h4 className="text-xl md:text-2xl font-semibold mb-3 mt-6 text-foreground">{children}</h4>
+      <h4 className="text-base sm:text-xl md:text-2xl font-semibold mb-3 mt-6 text-foreground">{children}</h4>
     ),
-    normal: ({ children }) => <p className="text-lg leading-relaxed mb-6 text-balance">{children}</p>,
+    normal: ({ children }) => <p className="text-base sm:text-lg leading-relaxed mb-6 text-balance">{children}</p>,
     blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-purple-500 pl-6 py-4 my-8 italic glass-morphism rounded-r-lg">
-        <div className="text-lg text-muted-foreground">{children}</div>
+      <blockquote className="border-l-4 border-purple-500 pl-4 sm:pl-6 py-4 my-8 italic glass-morphism rounded-r-lg">
+        <div className="text-base sm:text-lg text-muted-foreground">{children}</div>
       </blockquote>
     ),
   },
   list: {
-    bullet: ({ children }) => <ul className="list-disc list-inside space-y-3 mb-6 ml-4">{children}</ul>,
-    number: ({ children }) => <ol className="list-decimal list-inside space-y-3 mb-6 ml-4">{children}</ol>,
+    bullet: ({ children }) => <ul className="list-disc list-outside space-y-3 mb-6 ml-5 sm:ml-6 pl-1">{children}</ul>,
+    number: ({ children }) => <ol className="list-decimal list-outside space-y-3 mb-6 ml-5 sm:ml-6 pl-1">{children}</ol>,
   },
   listItem: {
-    bullet: ({ children }) => <li className="text-lg leading-relaxed">{children}</li>,
-    number: ({ children }) => <li className="text-lg leading-relaxed">{children}</li>,
+    bullet: ({ children }) => <li className="text-base sm:text-lg leading-relaxed">{children}</li>,
+    number: ({ children }) => <li className="text-base sm:text-lg leading-relaxed">{children}</li>,
   },
   marks: {
     strong: ({ children }) => <strong className="font-bold text-foreground">{children}</strong>,
