@@ -13,7 +13,7 @@ C# / .NET: 15 years | ASP.NET: 15 years | SQL Server: 15 years | JavaScript: 15 
 .NET Core: 6 years | Angular: 6 years | Entity Framework: 10 years | Azure: 6 years
 
 CORE EXPERTISE
-.NET Core, C#, VB.NET, ASP.NET MVC, Web API, SQL Server, Entity Framework, LINQ, Microsoft Azure, Azure CI/CD, Angular, React, JavaScript, jQuery, Bootstrap, WPF, Windows Forms, Crystal Reports, SSRS, ActiveReports, Stripe, Plaid, CQRS, Visual FoxPro migration, Agile/Scrum, Technical Leadership
+.NET Core, C#, VB.NET, ASP.NET MVC, Web API, SQL Server, Entity Framework, LINQ, Microsoft Azure, Azure CI/CD, Angular, React, JavaScript, jQuery, Bootstrap, WPF, Windows Forms, Crystal Reports, SSRS, ActiveReports, Stripe, Plaid, CQRS, Visual FoxPro migration, Cursor, Claude, OpenAI Codex, Antigravity, Agile/Scrum, Technical Leadership
 
 PROFESSIONAL EXPERIENCE
 
@@ -56,9 +56,10 @@ MCP: Developing ASP.NET MVC 4 Web Applications
 MCP: Developing Windows Azure and Web Services
 
 PUBLIC PROJECTS
+(Built with Cursor, Claude, OpenAI Codex and Antigravity)
 CompanyBrain — https://github.com/naqsh/CompanyBrain
 TaskFlowAI — https://github.com/naqsh/TaskFlowAI
 `;
 
 export const SEO_KEYWORDS =
-  "Senior .NET Engineer, Tech Lead, Principal Software Engineer, .NET Core, C#, ASP.NET MVC, Web API, SQL Server, Entity Framework, Microsoft Azure, Azure DevOps, CI/CD, Angular, React, legacy modernization, Visual FoxPro migration, Crystal Reports, SSRS, Stripe, Plaid, CQRS, digital banking, MCSD, Agile Scrum, technical leadership";
+  "Senior .NET Engineer, Tech Lead, Principal Software Engineer, .NET Core, C#, ASP.NET MVC, Web API, SQL Server, Entity Framework, Microsoft Azure, Azure DevOps, CI/CD, Angular, React, Cursor, Claude, Codex, Antigravity, legacy modernization, Visual FoxPro migration, Crystal Reports, SSRS, Stripe, Plaid, CQRS, digital banking, MCSD, Agile Scrum, technical leadership";

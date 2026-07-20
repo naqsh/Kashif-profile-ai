@@ -142,10 +142,10 @@ const PortfolioSection = () => {
       title: "CompanyBrain & TaskFlowAI",
       category: "Open Source / AI",
       description:
-        "Public Python repositories exploring company knowledge and AI-assisted task workflows under the naqsh GitHub profile.",
-      technologies: ["Python"],
+        "Public Python repositories exploring company knowledge and AI-assisted task workflows — built with Cursor, Claude, Codex and Antigravity under the naqsh GitHub profile.",
+      technologies: ["Python", "Cursor", "Claude", "Codex", "Antigravity"],
       features: [
-        "Open-source experimentation",
+        "Built with AI coding tools",
         "CompanyBrain knowledge workflows",
         "TaskFlowAI task automation",
         "Public GitHub portfolio",
@@ -159,7 +159,7 @@ const PortfolioSection = () => {
       title: "Kashif Profile AI",
       category: "Portfolio / AI",
       description:
-        "Personal portfolio with an AI Digital Twin — OpenRouter streaming chat, quotas, Sanity blog structure, resume endpoints and recruiter-friendly sections.",
+        "Personal portfolio with an AI Digital Twin — OpenRouter streaming chat, quotas, Sanity blog structure, resume endpoints. Built with Cursor, Claude, Codex and Antigravity.",
       technologies: [
         "Next.js 16",
         "React 19",
@@ -168,15 +168,19 @@ const PortfolioSection = () => {
         "Tailwind CSS v4",
         "ShadCN UI",
         "OpenRouter",
+        "Cursor",
+        "Claude",
+        "Codex",
+        "Antigravity",
         "Vitest",
         "Playwright",
       ],
       features: [
+        "Built with AI coding tools",
         "AI Digital Twin (OpenRouter)",
         "SSE streaming & quotas",
         "Sanity-ready /blogs + /studio",
         "ATS-friendly resume routes",
-        "Vitest + Playwright suite",
       ],
       status: "Production",
       highlight: false,

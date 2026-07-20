@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { PROFILE_DATA } from "@/lib/constants";
 import { useAnalytics } from "@/lib/analytics";
 import { useScrollTracking } from "@/hooks/use-scroll-tracking";
-import { Code, Database, Brain, Cloud, Cpu, Users } from "lucide-react";
+import { Code, Database, Brain, Cloud, Cpu, Users, Sparkles } from "lucide-react";
 
 function getSkillYears(skill: string): number | null {
   if (PROFILE_DATA.skillYears[skill] != null) {
@@ -47,6 +47,13 @@ const SkillsSection = () => {
     { title: "Cloud & DevOps", icon: Cloud, skills: PROFILE_DATA.skills.cloud, color: "from-orange-500 to-red-500" },
     { title: "Architecture", icon: Cpu, skills: PROFILE_DATA.skills.architecture, color: "from-indigo-500 to-purple-500" },
     { title: "Leadership", icon: Users, skills: PROFILE_DATA.skills.leadership, color: "from-pink-500 to-rose-500" },
+    {
+      title: "AI Coding Tools",
+      icon: Sparkles,
+      skills: PROFILE_DATA.skills.aiTools,
+      color: "from-sky-500 to-violet-500",
+      note: "All public GitHub projects were built with these tools",
+    },
   ];
 
   const headlineYears = [
@@ -75,7 +82,7 @@ const SkillsSection = () => {
           </motion.h2>
           <motion.p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto" variants={itemVariants}>
             .NET Core, C#, ASP.NET, SQL Server, Azure CI/CD, Angular, Entity Framework and enterprise
-            integrations — with verified years of hands-on experience
+            integrations — plus AI coding tools (Cursor, Claude, Codex, Antigravity) used to build all public GitHub projects
           </motion.p>
         </motion.div>
 
@@ -119,6 +126,10 @@ const SkillsSection = () => {
                     </div>
                     <h3 className="text-lg sm:text-xl font-bold leading-tight">{category.title}</h3>
                   </div>
+
+                  {"note" in category && category.note ? (
+                    <p className="text-xs text-muted-foreground mb-4 leading-relaxed">{category.note}</p>
+                  ) : null}
 
                   <ul className="space-y-2">
                     {category.skills.map((skill, skillIndex) => {

@@ -116,6 +116,12 @@ I specialise in Microsoft technologies — .NET Core, C#, ASP.NET MVC, Web API, 
       "Project Estimation",
       "Requirements & Design",
     ],
+    aiTools: [
+      "Cursor",
+      "Claude",
+      "OpenAI Codex",
+      "Antigravity",
+    ],
   },
 
   experience: [

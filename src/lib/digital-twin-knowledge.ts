@@ -14,23 +14,23 @@ export const GITHUB_REPOS = [
     name: "CompanyBrain",
     url: "https://github.com/naqsh/CompanyBrain",
     summary:
-      "Public Python project exploring company knowledge / AI workflows under the naqsh GitHub profile.",
-    technologies: ["Python"],
+      "Public Python project exploring company knowledge / AI workflows. Built with Cursor, Claude, OpenAI Codex and Antigravity.",
+    technologies: ["Python", "Cursor", "Claude", "Codex", "Antigravity"],
     dataFetching: "Python application code and repository documentation on GitHub.",
   },
   {
     name: "TaskFlowAI",
     url: "https://github.com/naqsh/TaskFlowAI",
     summary:
-      "Public Python project for AI-assisted task / workflow experimentation under the naqsh GitHub profile.",
-    technologies: ["Python"],
+      "Public Python project for AI-assisted task / workflow experimentation. Built with Cursor, Claude, OpenAI Codex and Antigravity.",
+    technologies: ["Python", "Cursor", "Claude", "Codex", "Antigravity"],
     dataFetching: "Python application code and repository documentation on GitHub.",
   },
   {
     name: "Kashif-Profile-AI",
     url: "https://github.com/naqsh",
     summary:
-      "Personal portfolio with AI Digital Twin — Next.js App Router, OpenRouter streaming chat, quotas, Sanity blog structure (CMS optional), resume endpoints.",
+      "Personal portfolio with AI Digital Twin — Next.js App Router, OpenRouter streaming chat, quotas, Sanity blog structure (CMS optional), resume endpoints. Built with Cursor, Claude, OpenAI Codex and Antigravity.",
     technologies: [
       "Next.js 16",
       "React 19",
@@ -40,6 +40,10 @@ export const GITHUB_REPOS = [
       "ShadCN UI",
       "OpenRouter",
       "Framer Motion",
+      "Cursor",
+      "Claude",
+      "Codex",
+      "Antigravity",
       "Vitest",
       "Playwright",
     ],
