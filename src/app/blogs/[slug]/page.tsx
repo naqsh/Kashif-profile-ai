@@ -7,6 +7,7 @@ import { BlogContent } from "@/components/blog-content";
 import { BlogCard } from "@/components/blog-card";
 import { Separator } from "@/components/ui/separator";
 import Navigation from "@/components/navigation";
+import { SITE_URL } from "@/lib/constants";
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     openGraph: {
       title: metaTitle,
       description: metaDescription,
-      url: `http://localhost:3000/blogs/${slug}`,
+      url: `${SITE_URL}/blogs/${slug}`,
       siteName: "Kashif Jilani",
       images: post.mainImage?.asset
         ? [

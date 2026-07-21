@@ -15,7 +15,8 @@ export function getOpenRouterApiKey(): string | undefined {
 export function getPrimaryModel(): string {
   return (
     process.env.LLM_PRIMARY_MODEL?.trim() ||
-    "openai/gpt-oss-120b"
+    // Keep in sync with the documented default in .env.example.
+    "nvidia/nemotron-3-ultra-550b-a55b:free"
   );
 }
 
@@ -63,15 +64,15 @@ export function maskApiKeyLabel(key: string): string {
   return `${key.slice(0, 12)}…${key.slice(-3)}`;
 }
 
+/**
+ * Derives run status for a *successful* stream: `degraded` when a fallback
+ * model answered instead of the primary. The failure path is handled inline by
+ * the route, so this helper only distinguishes success vs. degraded.
+ */
 export function resolveRunStatus(
   actualModel: string | undefined,
   primaryModel: string,
-  failed: boolean,
 ): RunStatus {
-  if (failed) {
-    return "failure";
-  }
-
   if (!actualModel) {
     return "success";
   }

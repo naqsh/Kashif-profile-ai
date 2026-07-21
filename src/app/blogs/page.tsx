@@ -5,6 +5,7 @@ import { BlogCard } from "@/components/blog-card";
 import { Separator } from "@/components/ui/separator";
 import { Sparkles } from "lucide-react";
 import Navigation from "@/components/navigation";
+import { SITE_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Blog | Kashif Jilani",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     title: "Blog | Kashif Jilani",
     description:
       "Insights on .NET, Azure, enterprise architecture, and modern web technologies.",
-    url: "http://localhost:3000/blogs",
+    url: `${SITE_URL}/blogs`,
     siteName: "Kashif Jilani",
     images: [
       {

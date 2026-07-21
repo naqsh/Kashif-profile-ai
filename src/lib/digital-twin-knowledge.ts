@@ -2,10 +2,12 @@
  * Grounded knowledge for the AI Digital Twin — LinkedIn, CV, and public GitHub repos only.
  */
 
+import { SITE_URL } from "@/lib/constants";
+
 export const DIGITAL_TWIN_LINKS = {
   linkedin: "https://www.linkedin.com/in/kjialni",
   github: "https://github.com/naqsh",
-  website: "http://localhost:3000",
+  website: SITE_URL,
   email: "kashif-jilani@outlook.com",
 } as const;
 

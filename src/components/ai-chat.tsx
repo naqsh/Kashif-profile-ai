@@ -14,6 +14,7 @@ import {
   Mic,
   MicOff,
 } from "lucide-react";
+import { toast } from "sonner";
 import { consumeChatStream } from "@/lib/chat-stream";
 import { DigitalTwinObservability } from "@/components/digital-twin-observability";
 import { ChatMarkdown } from "@/components/chat-markdown";
@@ -81,6 +82,31 @@ const AIChat = () => {
     }
   }, [isOpen]);
 
+  const closeChat = useCallback(() => {
+    markDigitalTwinDismissed();
+    setIsOpen(false);
+  }, []);
+
+  // Modal behaviour: close on Escape and lock body scroll while open.
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeChat();
+      }
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, closeChat]);
+
   const refreshQuota = useCallback(async () => {
     const snapshot = await fetchQuotaSnapshot();
     if (!snapshot) return;
@@ -104,12 +130,11 @@ const AIChat = () => {
 
   const toggleChat = useCallback(() => {
     if (isOpen) {
-      markDigitalTwinDismissed();
-      setIsOpen(false);
+      closeChat();
       return;
     }
     openChat();
-  }, [isOpen, openChat]);
+  }, [isOpen, closeChat, openChat]);
 
   const shouldFetchQuotaOnMount = useRef(
     typeof window !== "undefined" ? shouldAutoOpenDigitalTwin() : false,
@@ -260,10 +285,14 @@ const AIChat = () => {
 
       try {
         const history = [
-          ...messages.map((msg) => ({
-            role: msg.role,
-            content: msg.content,
-          })),
+          ...messages
+            // Drop the synthetic welcome bubble (and any empty placeholders)
+            // so it isn't billed as input tokens or mistaken for a real turn.
+            .filter((msg) => msg.id !== "welcome" && msg.content.trim() !== "")
+            .map((msg) => ({
+              role: msg.role,
+              content: msg.content,
+            })),
           {
             role: "user" as const,
             content: trimmed,
@@ -371,7 +400,7 @@ const AIChat = () => {
 
   const handleVoiceInput = useCallback(() => {
     if (!("webkitSpeechRecognition" in window) && !("SpeechRecognition" in window)) {
-      alert("Voice input is not supported in your browser.");
+      toast("Voice input is not supported in your browser.");
       return;
     }
 
@@ -379,7 +408,7 @@ const AIChat = () => {
       window.SpeechRecognition ?? window.webkitSpeechRecognition;
 
     if (!SpeechRecognitionCtor) {
-      alert("Voice input is not supported in your browser.");
+      toast("Voice input is not supported in your browser.");
       return;
     }
 
