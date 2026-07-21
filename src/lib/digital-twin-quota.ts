@@ -1,5 +1,11 @@
-import { createHmac, timingSafeEqual } from "crypto";
 import type { NextRequest, NextResponse } from "next/server";
+import {
+  decodeSignedCookie,
+  encodeSignedCookie,
+} from "@/lib/signed-cookie";
+import { quotaExceededMessage } from "@/lib/quota-messages";
+
+export { quotaExceededMessage };
 
 export const VISIT_COOKIE_NAME = "dt_visit";
 export const DAY_COOKIE_NAME = "dt_day";
@@ -36,14 +42,6 @@ type ChatMessage = { role: string; content: string };
 const COOKIE_MAX_AGE_VISIT = 60 * 60 * 24;
 const COOKIE_MAX_AGE_DAY = 60 * 60 * 24;
 
-function getQuotaSecret(): string {
-  return (
-    process.env.DIGITAL_TWIN_QUOTA_SECRET ||
-    process.env.OPENROUTER_API_KEY ||
-    "digital-twin-quota-dev-secret"
-  );
-}
-
 function parseEnvLimit(name: string): number {
   const raw = process.env[name]?.trim();
   if (!raw) return 0;
@@ -61,36 +59,6 @@ export function getQuotaLimits(): QuotaLimits {
 
 export function getTodayKey(date = new Date()): string {
   return date.toISOString().slice(0, 10);
-}
-
-function signPayload(encoded: string): string {
-  return createHmac("sha256", getQuotaSecret()).update(encoded).digest("base64url");
-}
-
-function encodeSignedCookie(payload: VisitPayload | DayPayload): string {
-  const encoded = Buffer.from(JSON.stringify(payload)).toString("base64url");
-  const signature = signPayload(encoded);
-  return `${encoded}.${signature}`;
-}
-
-function decodeSignedCookie<T>(value: string | undefined): T | null {
-  if (!value) return null;
-
-  const [encoded, signature] = value.split(".");
-  if (!encoded || !signature) return null;
-
-  const expected = signPayload(encoded);
-  const sigBuf = Buffer.from(signature);
-  const expBuf = Buffer.from(expected);
-  if (sigBuf.length !== expBuf.length || !timingSafeEqual(sigBuf, expBuf)) {
-    return null;
-  }
-
-  try {
-    return JSON.parse(Buffer.from(encoded, "base64url").toString("utf8")) as T;
-  } catch {
-    return null;
-  }
 }
 
 function createSessionId(): string {
@@ -214,11 +182,4 @@ export function trimConversationHistory<T extends ChatMessage>(
 
   const recentPairs = pairs.slice(-maxTurns);
   return recentPairs.flat();
-}
-
-export function quotaExceededMessage(reason: "visit" | "day"): string {
-  if (reason === "visit") {
-    return "You've reached the question limit for this visit. Clear chat to start a new visit, or try again tomorrow if you've also hit the daily limit.";
-  }
-  return "You've reached today's question limit. Please try again tomorrow, or clear chat if you still have visit allowance.";
 }

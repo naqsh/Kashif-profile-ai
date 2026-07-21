@@ -17,7 +17,7 @@ export const PROFILE_DATA = {
   email: "kashif-jilani@outlook.com",
   phone: "+92 (321) 5817137",
   linkedin: "https://www.linkedin.com/in/kjialni",
-  website: "http://localhost:3000",
+  website: SITE_URL,
   github: "https://github.com/naqsh",
   profilePhotoUrl:
     process.env.NEXT_PUBLIC_PROFILE_IMAGE_URL?.trim() || "/kashif-jilani.jpg",

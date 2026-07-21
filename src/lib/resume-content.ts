@@ -1,9 +1,11 @@
+import { SITE_URL } from "@/lib/constants";
+
 /** Plain-text CV fallback when remote URL is unavailable */
 export const RESUME_PLAIN_TEXT_FALLBACK = `KASHIF JILANI
 Senior .NET Engineer / Tech Lead | .NET Core, C#, ASP.NET | Microsoft Azure | SQL Server | 15+ Years Experience
 Lahore, Pakistan
 Email: kashif-jilani@outlook.com | Phone: +92 (321) 5817137
-LinkedIn: https://www.linkedin.com/in/kjialni | GitHub: https://github.com/naqsh | Website: http://localhost:3000
+LinkedIn: https://www.linkedin.com/in/kjialni | GitHub: https://github.com/naqsh | Website: ${SITE_URL}
 
 CAREER SUMMARY
 Senior .NET engineer and former Principal / Tech Lead with 15+ years of comprehensive experience in design, development, implementation and integration of customized software. Microsoft Certified Solution Developer (MCSD: Web Applications) with deep expertise across ASP.NET, C#, VB.NET, Web API, SQL Server, Entity Framework, Angular, WPF and Microsoft Azure CI/CD. Proven delivery of legacy modernization (Visual FoxPro → .NET Core), digital banking, payments, legal-tech, rental, HR, procurement and industrial systems while setting organisation-level coding standards and mentoring engineering teams.

@@ -21,8 +21,18 @@ import {
 } from "@/lib/digital-twin-quota";
 import type { RunMetadata } from "@/lib/usage-tracking";
 import { buildDigitalTwinSystemPrompt } from "@/lib/digital-twin-knowledge";
+import { validateChatRequest } from "@/lib/chat-validation";
+import {
+  checkAndConsumeRateLimit,
+  getClientIp,
+} from "@/lib/rate-limit";
+
+export const runtime = "nodejs";
 
 const SYSTEM_PROMPT = buildDigitalTwinSystemPrompt();
+
+/** Reject request bodies larger than this (bytes) before parsing/forwarding. */
+const MAX_BODY_BYTES = 64 * 1024;
 
 type OpenRouterChatParams = ChatCompletionCreateParamsStreaming & {
   models: string[];
@@ -32,11 +42,6 @@ type OpenRouterChatParams = ChatCompletionCreateParamsStreaming & {
 type OpenRouterUsage = {
   total_tokens?: number;
   cost?: number;
-};
-
-type IncomingMessage = {
-  role: "user" | "assistant" | "system";
-  content: string;
 };
 
 function buildChatCompletionParams(
@@ -79,12 +84,42 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { messages } = (await request.json()) as { messages?: IncomingMessage[] };
-
-    if (!messages || !Array.isArray(messages)) {
+    const contentLength = Number(request.headers.get("content-length") ?? 0);
+    if (Number.isFinite(contentLength) && contentLength > MAX_BODY_BYTES) {
       return NextResponse.json(
-        { error: "Messages array is required" },
+        { error: "Request body too large" },
+        { status: 413 },
+      );
+    }
+
+    let rawBody: unknown;
+    try {
+      rawBody = await request.json();
+    } catch {
+      return NextResponse.json(
+        { error: "Invalid JSON body" },
         { status: 400 },
+      );
+    }
+
+    const validation = validateChatRequest(rawBody);
+    if (!validation.ok) {
+      return NextResponse.json({ error: validation.error }, { status: 400 });
+    }
+
+    const { messages } = validation.data;
+
+    // Hard, server-side abuse cap (cannot be reset by clearing cookies).
+    const rateLimit = checkAndConsumeRateLimit(getClientIp(request));
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        {
+          error: "rate_limited",
+          scope: rateLimit.scope,
+          message:
+            "The digital twin is handling a lot of questions right now. Please try again later.",
+        },
+        { status: 429 },
       );
     }
 
@@ -166,7 +201,7 @@ export async function POST(request: NextRequest) {
             tokens: totalTokens,
             costUsd,
             model: responseModel,
-            status: resolveRunStatus(responseModel, primaryModel, false),
+            status: resolveRunStatus(responseModel, primaryModel),
           };
 
           controller.enqueue(

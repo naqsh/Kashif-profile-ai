@@ -42,27 +42,27 @@ export async function sanityFetch<T = unknown>(options: {
   params?: Record<string, unknown>;
   revalidate?: number | false;
   tags?: string[];
+  /** Value returned when Sanity is unconfigured or the request fails. */
+  fallback?: T;
 }): Promise<T> {
   const { query, params = {}, revalidate, tags = [] } = options;
+  const fallback = (options.fallback ?? ([] as unknown)) as T;
 
   if (!projectId) {
-    return [] as T;
+    return fallback;
   }
 
-  return fetch(
-    `https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ query, params }),
+  try {
+    // Use the pre-configured client so CDN host, perspective and stega
+    // settings stay consistent (instead of hand-rolling the fetch/host).
+    return await client.fetch<T>(query, params, {
       next: {
         revalidate: revalidate ?? 3600,
         tags,
       },
-    }
-  )
-    .then((res) => res.json())
-    .then((data) => data.result as T);
+    });
+  } catch (error) {
+    console.error("Sanity fetch failed:", error);
+    return fallback;
+  }
 }

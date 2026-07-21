@@ -86,13 +86,13 @@ describe("openrouter helpers", () => {
 
   it("marks fallback responses as degraded", () => {
     expect(
-      resolveRunStatus("deepseek/deepseek-v4-flash", "openai/gpt-oss-120b:free", false),
+      resolveRunStatus("deepseek/deepseek-v4-flash", "openai/gpt-oss-120b:free"),
     ).toBe("degraded");
     expect(
-      resolveRunStatus("openai/gpt-oss-120b:free", "openai/gpt-oss-120b:free", false),
+      resolveRunStatus("openai/gpt-oss-120b:free", "openai/gpt-oss-120b:free"),
     ).toBe("success");
-    expect(resolveRunStatus(undefined, "openai/gpt-oss-120b:free", true)).toBe(
-      "failure",
+    expect(resolveRunStatus(undefined, "openai/gpt-oss-120b:free")).toBe(
+      "success",
     );
   });
 });

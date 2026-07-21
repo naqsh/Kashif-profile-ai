@@ -109,6 +109,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
     params: { slug },
     tags: [`blogPost:${slug}`],
     revalidate: 60,
+    fallback: null,
   });
 }
 

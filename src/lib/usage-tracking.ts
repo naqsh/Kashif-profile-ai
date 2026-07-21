@@ -1,3 +1,7 @@
+import { quotaExceededMessage } from "@/lib/quota-messages";
+
+export { quotaExceededMessage };
+
 export const USAGE_STORAGE_KEY = "kashif-digital-twin-usage";
 
 export type UsageTracking = {
@@ -102,6 +106,11 @@ export function recordSuccessfulRun(costUsd: number): UsageTracking {
   return next;
 }
 
+export type VisitUsageSnapshot = {
+  runs: number;
+  costUsd: number;
+};
+
 export function getVisitUsage(
   lifetime: UsageTracking,
   baseline: UsageTracking,
@@ -111,11 +120,6 @@ export function getVisitUsage(
     costUsd: Math.max(0, lifetime.cumulativeCostUsd - baseline.cumulativeCostUsd),
   };
 }
-
-export type VisitUsageSnapshot = {
-  runs: number;
-  costUsd: number;
-};
 
 export function formatQuotaBanner(snapshot: QuotaSnapshot): string | null {
   if (snapshot.visitLimit === 0 && snapshot.dayLimit === 0) {
@@ -143,13 +147,6 @@ export function isQuotaExceeded(snapshot: QuotaSnapshot): boolean {
     return true;
   }
   return false;
-}
-
-export function quotaExceededMessage(reason: "visit" | "day"): string {
-  if (reason === "visit") {
-    return "You've reached the question limit for this visit. Clear chat to start a new visit, or try again tomorrow if you've also hit the daily limit.";
-  }
-  return "You've reached today's question limit. Please try again tomorrow, or clear chat if you still have visit allowance.";
 }
 
 export async function fetchQuotaSnapshot(): Promise<QuotaSnapshot | null> {

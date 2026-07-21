@@ -1,4 +1,3 @@
-import { createHmac, timingSafeEqual } from "crypto";
 import type { NextRequest, NextResponse } from "next/server";
 import {
   getChatbaseMonthlyBudget,
@@ -7,6 +6,10 @@ import {
   normalizeMirrorSnapshot,
   type ChatbaseMirrorSnapshot,
 } from "@/lib/digital-twin-provider";
+import {
+  decodeSignedCookie,
+  encodeSignedCookie,
+} from "@/lib/signed-cookie";
 
 export const CHATBASE_MIRROR_COOKIE_NAME = "dt_chatbase_global";
 
@@ -17,49 +20,11 @@ type MirrorPayload = {
 
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 35;
 
-function getMirrorSecret(): string {
-  return (
-    process.env.DIGITAL_TWIN_QUOTA_SECRET ||
-    process.env.OPENROUTER_API_KEY ||
-    "digital-twin-quota-dev-secret"
-  );
-}
-
-function signPayload(encoded: string): string {
-  return createHmac("sha256", getMirrorSecret()).update(encoded).digest("base64url");
-}
-
-function encodeSignedCookie(payload: MirrorPayload): string {
-  const encoded = Buffer.from(JSON.stringify(payload)).toString("base64url");
-  const signature = signPayload(encoded);
-  return `${encoded}.${signature}`;
-}
-
-function decodeSignedCookie(value: string | undefined): MirrorPayload | null {
-  if (!value) return null;
-
-  const [encoded, signature] = value.split(".");
-  if (!encoded || !signature) return null;
-
-  const expected = signPayload(encoded);
-  const sigBuf = Buffer.from(signature);
-  const expBuf = Buffer.from(expected);
-  if (sigBuf.length !== expBuf.length || !timingSafeEqual(sigBuf, expBuf)) {
-    return null;
-  }
-
-  try {
-    return JSON.parse(Buffer.from(encoded, "base64url").toString("utf8")) as MirrorPayload;
-  } catch {
-    return null;
-  }
-}
-
 export function readMirrorPayload(
   request: NextRequest,
   month = getMonthKey(),
 ): MirrorPayload {
-  const parsed = decodeSignedCookie(
+  const parsed = decodeSignedCookie<MirrorPayload>(
     request.cookies.get(CHATBASE_MIRROR_COOKIE_NAME)?.value,
   );
 
